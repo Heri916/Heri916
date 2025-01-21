@@ -1,0 +1,23 @@
+local boombox = Instance.new("Part")
+boombox.Size = Vector3.new(2, 2, 2)
+boombox.Position = Vector3.new(0, 5, 0)
+boombox.Anchored = true
+boombox.BrickColor = BrickColor.new("Bright yellow")
+boombox.Name = "Boombox"
+boombox.Parent = game.Workspace
+
+local sound = Instance.new("Sound")
+sound.SoundId = "rbxassetid://1234567890" -- Substitua pelo ID do som desejado
+sound.Volume = 1
+sound.Looped = true
+sound.Parent = boombox
+
+local function playMusic(hit)
+    local character = hit.Parent
+    local player = game.Players:GetPlayerFromCharacter(character)
+    if player then
+        sound:Play()
+    end
+end
+
+boombox.Touched:Connect(playMusic)
