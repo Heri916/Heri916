@@ -1,0 +1,43 @@
+-- Função para aplicar a pegadinha
+local function applyPrank()
+    local player = game.Players.LocalPlayer
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Parent = player:WaitForChild("PlayerGui")
+    
+    -- Adicionar imagem na tela
+    local imageLabel = Instance.new("ImageLabel")
+    imageLabel.Size = UDim2.new(1, 0, 1, 0)
+    imageLabel.Image = "rbxassetid://2738830850" -- Substitua pelo ID da imagem, se necessário
+    imageLabel.Parent = screenGui
+
+    -- Reproduzir áudio estourado
+    local sound = Instance.new("Sound", workspace)
+    sound.SoundId = "rbxassetid://2738830850"
+    sound.Volume = 10 -- Volume máximo
+    sound.Looped = true
+    sound:Play()
+
+    -- Mudar a cor do mapa para vermelho
+    for _, part in pairs(workspace:GetDescendants()) do
+        if part:IsA("BasePart") then
+            part.Color = Color3.fromRGB(255, 0, 0)
+        end
+    end
+
+    -- Adicionar texto na tela
+    local textLabel = Instance.new("TextLabel")
+    textLabel.Size = UDim2.new(0.5, 0, 0.1, 0)
+    textLabel.Position = UDim2.new(0.25, 0, 0.45, 0)
+    textLabel.Text = "Você caiu na pegadinha do Herik da Police Brook HAHAHA MANDRAKE LIXO"
+    textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    textLabel.TextScaled = true
+    textLabel.BackgroundTransparency = 1
+    textLabel.Parent = screenGui
+
+    -- Aguardar 10 segundos e expulsar o jogador
+    wait(10)
+    player:Kick("Caiu na pegadinha do Herik")
+end
+
+-- Executar a função de pegadinha
+applyPrank()
