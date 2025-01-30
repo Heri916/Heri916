@@ -1,0 +1,237 @@
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+
+
+local Window = Fluent:CreateWindow({
+    Title = "Fluent " .. Fluent.Version,
+    SubTitle = "by dawid",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(580, 460),
+    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
+})
+
+local Tab = Window:AddTab({ Title = "Main", Icon = "" })
+
+
+local toggles = {
+    LagGhostMeterV2 = false
+}
+
+local function clickNormally(object)
+    local clickDetector = object:FindFirstChildWhichIsA("ClickDetector")
+    if clickDetector then
+        fireclickdetector(clickDetector) -- Clica normalmente
+    end
+end
+
+local function lagarServer2()
+    local ghostMeterPath = workspace:FindFirstChild("WorkspaceCom"):FindFirstChild("001_GiveTools"):FindFirstChild("GhostMeter")
+    if ghostMeterPath then
+        while toggles.LagGhostMeterV2 do
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = ghostMeterPath.CFrame
+            clickNormally(ghostMeterPath)
+            wait(0) -- Executa rapidamente
+        end
+    else
+        warn("Item GhostMeter nÃ£o encontrado.")
+    end
+end
+
+
+
+local Toggle = Tab:AddToggle("MyToggle", {Title = "Lag v2 Toggle Ghost Mater(crash)", Default = false })
+
+Toggle:OnChanged(function(state)
+    toggles.LagGhostMeterV2 = state
+        if state then
+            spawn(lagarServer2) -- Executa o lag em uma nova thread
+        else
+            print("Lag Ghost Meter V2 desligado.")
+        end
+end)
+
+
+local toggles = {
+    DupeBasketball = false
+}
+
+local function clickNormally(object)
+    local clickDetector = object:FindFirstChildWhichIsA("ClickDetector")
+    if clickDetector then
+        fireclickdetector(clickDetector) -- Clica normalmente
+    end
+end
+
+local function dupeItem(itemPath, maxTeleports)
+    if itemPath then
+        local teleportCount = 0
+        while teleportCount < maxTeleports and toggles.DupeBasketball do
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = itemPath.CFrame
+            clickNormally(itemPath)
+            teleportCount = teleportCount + 1
+            wait(0.01) -- Tempo de espera para evitar travamento
+        end
+    else
+        warn("Item nÃ£o encontrado.")
+    end
+end
+
+
+local Toggle = Tab:AddToggle("MyToggle", {Title = "Dupe basketball", Default = false })
+
+Toggle:OnChanged(function(state)
+ toggles.DupeBasketball = state
+        if state then
+            local basketballPath = workspace:FindFirstChild("WorkspaceCom"):FindFirstChild("001_GiveTools"):FindFirstChild("Basketball")
+            spawn(function()
+                dupeItem(basketballPath, 9999999999999999999999999999999999999)
+            end)
+        else
+            print("Dupe Basketball desligado.")
+        end
+end)
+
+
+local toggles = {
+    DupeExtintor = false
+}
+
+local function clickNormally(object)
+    local clickDetector = object:FindFirstChildWhichIsA("ClickDetector")
+    if clickDetector then
+        fireclickdetector(clickDetector) -- Clica normalmente
+    end
+end
+
+local function dupeItem(itemPath, maxTeleports)
+    if itemPath then
+        local teleportCount = 0
+        while teleportCount < maxTeleports and toggles.DupeExtintor do
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = itemPath.CFrame
+            clickNormally(itemPath)
+            teleportCount = teleportCount + 1
+            wait(0.01) -- Tempo de espera para evitar travamento
+        end
+    else
+        warn("Item nÃ£o encontrado.")
+    end
+end
+
+
+local Toggle = Tab:AddToggle("MyToggle", {Title = "Dupe extinto", Default = false })
+
+Toggle:OnChanged(function(state)
+    toggles.DupeExtintor = state
+        if state then
+            local fireXPath = workspace:FindFirstChild("WorkspaceCom"):FindFirstChild("001_GiveTools"):FindFirstChild("FireX")
+            spawn(function()
+                dupeItem(fireXPath, 999999999999999999999999999999999999999)
+            end)
+        else
+            print("Dupe Extintor desligado.")
+        end
+end)
+
+
+
+local toggles = {
+    DupeBook = false
+}
+
+local function clickNormally(object)
+    local clickDetector = object:FindFirstChildWhichIsA("ClickDetector")
+    if clickDetector then
+        fireclickdetector(clickDetector) -- Clica normalmente
+    end
+end
+
+local function dupeItem(itemPath, maxTeleports)
+    if itemPath then
+        local teleportCount = 0
+        while teleportCount < maxTeleports and toggles.DupeBook do
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = itemPath.CFrame
+            clickNormally(itemPath)
+            teleportCount = teleportCount + 1
+            wait(0.01) -- Tempo de espera para evitar travamento
+        end
+    else
+        warn("Item nÃ£o encontrado.")
+    end
+end
+
+
+local Toggle = Tab:AddToggle("MyToggle", {Title = "Dupe Book", Default = false })
+
+Toggle:OnChanged(function(state)
+    toggles.DupeBook = state
+        if state then
+            local bookPath = workspace:FindFirstChild("WorkspaceCom"):FindFirstChild("001_DayCare"):FindFirstChild("Tools"):FindFirstChild("Book")
+            spawn(function()
+                dupeItem(bookPath, 99999999999999999999999999999999999)
+            end)
+        else
+            print("Dupe Book desligado.")
+        end
+end)
+
+
+
+local toggles = {
+    DupeStretcher = false
+}
+
+local function clickNormally(object)
+    local clickDetector = object:FindFirstChildWhichIsA("ClickDetector")
+    if clickDetector then
+        fireclickdetector(clickDetector) -- Clica normalmente
+    end
+end
+
+local function dupeItem(itemPath, maxTeleports)
+    if itemPath then
+        local teleportCount = 0
+        while teleportCount < maxTeleports and toggles.DupeStretcher do
+            if game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = itemPath.CFrame
+                clickNormally(itemPath)
+                teleportCount = teleportCount + 1
+                wait(0.01) -- Tempo de espera para evitar travamento
+            else
+                warn("Personagem do jogador nÃ£o encontrado.")
+                break
+            end
+        end
+    else
+        warn("ItemPath invÃ¡lido.")
+    end
+end
+
+local function dupeStretcher()
+    local stretcherPath = workspace:FindFirstChild("WorkspaceCom")
+        and workspace.WorkspaceCom:FindFirstChild("001_GiveTools")
+        and workspace.WorkspaceCom["001_GiveTools"]:FindFirstChild("Stretcher")
+    
+    if stretcherPath then
+        dupeItem(stretcherPath, 9999999999999999999999999999999999999999999999999999999999) -- Duplicar 300 vezes
+    else
+        warn("Item Stretcher nÃ£o encontrado.")
+    end
+end
+
+
+local Toggle = Tab:AddToggle("MyToggle", {Title = "Dupe Maca hospital", Default = false })
+
+Toggle:OnChanged(function(state)
+    toggles.DupeStretcher = state
+        if state then
+            spawn(function()
+                while toggles.DupeStretcher do
+                    dupeStretcher()
+                    wait(0.1) -- Espera entre duplicaÃ§Ãµes
+                end
+            end)
+        else
+            print("Dupe Stretcher desligado.")
+        end
+end)
