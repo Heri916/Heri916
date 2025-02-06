@@ -1,0 +1,194 @@
+local player = game.Players.LocalPlayer
+local backpack = player:WaitForChild("Backpack")
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+-- Criar o item Boombox e adicionÃ¡-lo diretamente na Backpack
+local i = Instance.new("Tool")
+i.Name = "Boombox"
+i.Parent = backpack  -- Agora Ã© adicionado diretamente na Backpack
+i.Grip = CFrame.new(0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+i.GripForward = Vector3.new(0, -1, 0)
+i.GripRight = Vector3.new(0, 0, 1)
+i.GripUp = Vector3.new(1, 0, 0)
+
+local j = Instance.new("Part")
+j.Name = "Handle"
+j.Parent = i
+j.Size = Vector3.new(1, 1.2, 1)
+j.Color = Color3.new(0.0666667, 0.0666667, 0.0666667)
+j.Transparency = 1
+j.Anchored = false
+j.CanCollide = false
+
+local screenGui
+
+local function createGui()
+    screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "BoomboxGui"
+    screenGui.Parent = game.Players.LocalPlayer.PlayerGui
+
+    local frame = Instance.new("Frame")
+    frame.Size = UDim2.new(0, 350, 0, 150)
+    frame.Position = UDim2.new(0.5, -175, 0.5, -75)
+    frame.BackgroundColor3 = Color3.fromRGB(0, 100, 255) -- Azul
+    frame.BackgroundTransparency = 0.3 -- Transparente
+    frame.BorderSizePixel = 0
+    frame.Parent = screenGui
+
+    local uiCorner = Instance.new("UICorner")
+    uiCorner.CornerRadius = UDim.new(0, 15)
+    uiCorner.Parent = frame
+
+    local title = Instance.new("TextLabel")
+    title.Size = UDim2.new(1, 0, 0.4, 0)
+    title.Position = UDim2.new(0, 0, 0, 0)
+    title.Text = "Coloque um ID de Ã¡udio e aperte Play Boombox By:Noly Fragiota"
+    title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    title.BackgroundTransparency = 1
+    title.Font = Enum.Font.GothamBold
+    title.TextWrapped = true
+    title.TextScaled = true
+    title.Parent = frame
+
+    local input = Instance.new("TextBox")
+    input.Size = UDim2.new(0.9, 0, 0.18, 0)
+    input.Position = UDim2.new(0.05, 0, 0.5, 0)
+    input.Text = "1780625909"
+    input.TextColor3 = Color3.fromRGB(255, 255, 255)
+    input.BackgroundColor3 = Color3.fromRGB(0, 50, 150) -- Azul escuro
+    input.BackgroundTransparency = 0.3
+    input.Font = Enum.Font.SourceSans
+    input.TextScaled = true
+    input.BorderSizePixel = 0
+    input.Parent = frame
+
+    local inputCorner = Instance.new("UICorner")
+    inputCorner.CornerRadius = UDim.new(0, 10)
+    inputCorner.Parent = input
+
+    -- FunÃ§Ã£o para criar os botÃµes
+    local function createButton(text, positionY, callback)
+        local button = Instance.new("TextButton")
+        button.Size = input.Size
+        button.Position = UDim2.new(0.05, 0, positionY, 0)
+        button.Text = text
+        button.TextColor3 = Color3.fromRGB(255, 255, 255)
+        button.BackgroundColor3 = Color3.fromRGB(0, 50, 150) -- Azul escuro
+        button.Font = Enum.Font.GothamBold
+        button.TextScaled = true
+        button.BorderSizePixel = 1
+        button.BorderColor3 = Color3.fromRGB(255, 255, 255)
+        button.Parent = frame
+
+        local buttonCorner = Instance.new("UICorner")
+        buttonCorner.CornerRadius = UDim.new(0, 10)
+        buttonCorner.Parent = button
+
+        button.MouseButton1Click:Connect(callback)
+    end
+
+    -- FunÃ§Ã£o do botÃ£o Play (toca o Ã¡udio)
+    createButton("Play", 0.75, function()
+        local audioId = tonumber(input.Text) or 7337298420
+        local args = {
+            [1] = "PickingTools",
+            [2] = "Assault"
+        }
+
+        game:GetService("ReplicatedStorage").RE:FindFirstChild("1Too1l"):InvokeServer(unpack(args))
+
+        wait(0.1)
+
+        local player = game.Players.LocalPlayer
+        local backpack = player:WaitForChild("Backpack")
+
+        local tool = backpack:WaitForChild("Assault", 10)
+
+        if tool then
+            tool.Parent = player.Character
+        end
+
+        wait(0.1)
+
+        local args = {
+            [1] = workspace.Model.Street.Street,
+            [2] = game:GetService("Players").LocalPlayer.Character.Assault.Handle,
+            [3] = Vector3.new(0.2, 0.3, -2.5),
+            [4] = Vector3.new(115.74, 0.025, -36.11),
+            [5] = game:GetService("Players").LocalPlayer.Character.Assault.GunScript_Local.MuzzleEffect,
+            [6] = game:GetService("Players").LocalPlayer.Character.Assault.GunScript_Local.HitEffect,
+            [7] = audioId,
+            [8] = audioId,
+            [9] = { [1] = false },
+            [10] = {
+                [1] = 25,
+                [2] = Vector3.new(0.25, 0.25, 100),
+                [3] = BrickColor.new(24),
+                [4] = 0.25,
+                [5] = Enum.Material.SmoothPlastic,
+                [6] = 0.25
+            },
+            [11] = true,
+            [12] = false
+        }
+
+        local muzzleEffect = game:GetService("Players").LocalPlayer.Character.Assault.GunScript_Local.MuzzleEffect
+        local sound = muzzleEffect:FindFirstChildOfClass("Sound")
+
+        if sound then
+            sound.SoundId = "rbxassetid://" .. audioId
+        end
+
+        game:GetService("ReplicatedStorage").RE:FindFirstChild("1Gu1n"):FireServer(unpack(args))
+
+        wait(1.4)
+
+        game:GetService("ReplicatedStorage").RE["1Clea1rTool1s"]:FireServer("ClearAllTools")
+    end)
+
+    -- FunÃ§Ã£o do botÃ£o Play All (toca para todos)
+    createButton("Play All", 0.95, function()
+        local audioId = tonumber(input.Text) or 7236490488
+        local args = {workspace, audioId, 1}
+
+        local soundID = game:GetService("ReplicatedStorage").RE:FindFirstChild("1Gu1nSound1s")
+
+        if soundID then
+            soundID:FireServer(unpack(args))
+            wait(6)
+            soundID:FireServer(workspace, 0, 0)
+        end
+    end)
+end
+
+-- FunÃ§Ã£o de equipar o item
+local function onEquipped()
+    createGui()
+    local args = { "wear", 18756289999 }
+    local updateAvatarEvent = game:GetService("ReplicatedStorage").RE:FindFirstChild("1Updat1eAvata1r")
+    if updateAvatarEvent then
+        updateAvatarEvent:FireServer(unpack(args))
+    end
+end
+
+-- FunÃ§Ã£o de desequipar o item
+local function onUnequipped()
+    if screenGui then
+        screenGui:Destroy()
+        screenGui = nil
+    end
+    local args = { "remove", 18756289999 }
+    local updateAvatarEvent = game:GetService("ReplicatedStorage").RE:FindFirstChild("1Updat1eAvata1r")
+    if updateAvatarEvent then
+        updateAvatarEvent:FireServer(unpack(args))
+    end
+end
+
+-- Conectar eventos de Equipar e Desequipar
+i.Equipped:Connect(onEquipped)
+i.Unequipped:Connect(onUnequipped)
+
+i.Parent = backpack -- Agora o Boombox serÃ¡ adicionado Ã  Backpack do jogador
+
+print("Tool 'Boombox'.")
