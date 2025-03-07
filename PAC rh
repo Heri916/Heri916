@@ -1,0 +1,108 @@
+-- Carregar biblioteca Orion
+local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/jensonhirst/Orion/main/source'))()
+
+-- Avisos ao executar
+OrionLib:MakeNotification({
+    Name = "script executado", 
+    Content = "aproveite o script", 
+    Image = "rbxassetid://4483345998", 
+    Time = 5
+})
+
+local Window = OrionLib:MakeWindow({
+    Name = "pac do RH", 
+    HidePremium = false, 
+    SaveConfig = true, 
+    ConfigFolder = "OrionTest"
+})
+
+local TabMain = Window:MakeTab({
+    Name = "Main",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local TabSettings = Window:MakeTab({
+    Name = "Settings",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local TabScripts = Window:MakeTab({
+    Name = "Scripts",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+-- ParÃƒÂ¡grafos
+TabMain:AddParagraph("Boa sorte", "Boa sorte")
+
+-- BotÃƒÂµes
+TabScripts:AddButton({
+    Name = "Rael hub",
+    Callback = function()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Rael-Hub-27610"))()
+    end
+})
+
+TabScripts:AddButton({
+    Name = "Chaos hub",
+    Callback = function()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-Chaos-Hub-V1-NO-KEY-29245"))()
+    end
+})
+
+TabScripts:AddButton({
+    Name = "Shadow hub",
+    Callback = function()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-Shadow-Hub-27866"))()
+    end
+})
+
+TabScripts:AddButton({
+    Name = "Fly",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
+    end
+})
+
+TabScripts:AddButton({
+    Name = "Velocidade",
+    Callback = function()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-ROBLOX-UNIVERSAL-SPEED-SCRIPT-10698"))()
+    end
+})
+
+TabScripts:AddButton({
+    Name = "Cleitin hub key: kakakgaisvau",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/CLEITI6966/teste/refs/heads/main/scriptdebosta.lua"))()
+    end
+})
+
+TabScripts:AddButton({
+    Name = "SHNMAXHUB ( NÃƒÆ’O SEI QUAL VERSÃƒÆ’O)",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/kiwidev246/SHNMAX-/refs/heads/main/README.md"))()
+    end
+})
+
+TabScripts:AddButton({
+    Name = "SP HUB",
+    Callback = function()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-SP-Hub-New-Uptade-Script-29166"))()
+    end
+})
+
+
+-- Alterador
+local Toggle = TabMain:AddToggle({
+    Name = "OpÃƒÂ§ÃƒÂ£o em desenvolvimento",
+    Default = false,
+    Callback = function(Value)
+        print(Value)
+    end
+})
+
+-- Iniciar a interface
+OrionLib:Init()
